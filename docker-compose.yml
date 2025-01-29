@@ -1,0 +1,46 @@
+services:
+  adminer:
+    image: adminer
+    container_name: adminer-container
+    ports:
+      - "8080:8080"
+  db:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: immersion
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api-container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/immersion
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+
+  web:
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile
+    container_name: web-container
+    environment:
+      API_BASE_URL: http://api:9000
+    ports:
+      - "9001:9001"
+    depends_on:
+      - api
+
+volumes:
+  db_data:

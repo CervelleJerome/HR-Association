@@ -27,6 +27,7 @@ public class EmployeeProxy {
 	 */
 	public Iterable<Employee> getEmployees() {
 
+		System.out.println("props.getApiUrl() = " + props.getApiUrl());
 		String baseApiUrl = props.getApiUrl();
 		String getEmployeesUrl = baseApiUrl + "/employees";
 
@@ -39,7 +40,7 @@ public class EmployeeProxy {
 		);
 
 		//log.debug("Get Employees call status: " + response.getStatusCode().toString());  // Logging the HTTP response status
-		log.debug("Get Employees call status: {}", response.getStatusCode().toString());  // Logging the HTTP response status
+		//log.debug("Get Employees call status: {}", response.getStatusCode().toString());  // Logging the HTTP response status
 		return response.getBody();
 	}
 
@@ -60,7 +61,7 @@ public class EmployeeProxy {
 				Employee.class
 		);
 
-		log.debug("Get Employee call status for id {}: {}", id, response.getStatusCode().toString());  // Logging the HTTP response status
+		//log.debug("Get Employee call status for id {}: {}", id, response.getStatusCode().toString());  // Logging the HTTP response status
 
 		return response.getBody();
 	}
@@ -82,7 +83,7 @@ public class EmployeeProxy {
 				request,
 				Employee.class);
 
-		log.debug("Create Employee call status: " + response.getStatusCode().toString());  // Logging the HTTP response status
+		//log.debug("Create Employee call status: " + response.getStatusCode().toString());  // Logging the HTTP response status
 
 		return response.getBody();
 	}
@@ -103,7 +104,7 @@ public class EmployeeProxy {
 				request,
 				Employee.class);
 
-		log.debug("Update Employee call status for id {}: {}", e.getId(), response.getStatusCode().toString());  // Logging the HTTP response status
+		//log.debug("Update Employee call status for id {}: {}", e.getId(), response.getStatusCode().toString());  // Logging the HTTP response status
 
 		return response.getBody();
 	}
@@ -124,7 +125,7 @@ public class EmployeeProxy {
 				null,
 				Void.class);
 
-		log.debug("Delete Employee call status for id {}: {}", id, response.getStatusCode().toString());  // Logging the HTTP response status
+		//log.debug("Delete Employee call status for id {}: {}", id, response.getStatusCode().toString());  // Logging the HTTP response status
 	}
 
 }
